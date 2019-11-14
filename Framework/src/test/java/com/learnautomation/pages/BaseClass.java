@@ -31,33 +31,31 @@ public class BaseClass {
 	String reportPath;
 
 	@BeforeSuite
-	public void setUpSuite() 
-	{
-		
+	public void setUpSuite() {
+
 		Reporter.log("Setting up reports and Test is getting ready", true);
-		
+
 		excel = new ExcelDataProvider();
 		config = new ConfigDataProvider();
-		
-		reportPath=System.getProperty("user.dir")+"/Reports/FreeCRM_"+Helper.getCurrentDateTime()+".html";
-		
-		ExtentHtmlReporter extent=new ExtentHtmlReporter(new File(reportPath));
-		report=new ExtentReports();
+
+		reportPath = System.getProperty("user.dir") + "/Reports/FreeCRM_" + Helper.getCurrentDateTime() + ".html";
+
+		ExtentHtmlReporter extent = new ExtentHtmlReporter(new File(reportPath));
+		report = new ExtentReports();
 		report.attachReporter(extent);
-		
+
 		Reporter.log("Setting Done- Test can be started", true);
 	}
 
-	@Parameters({"browser","urlToBeTested"})
+	@Parameters({ "browser", "urlToBeTested" })
 	@BeforeClass
-	public void setup(String browser,String url) 
-	{
-		
+	public void setup(String browser, String url) {
+
 		Reporter.log("Trying to start Browser and Getting application ready", true);
-		
-		//driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());
-		
-		driver = BrowserFactory.startApplication(driver, browser,url);
+
+//		driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());
+
+		driver = BrowserFactory.startApplication(driver, browser, url);
 
 		Reporter.log("Browser and Application is up and running", true);
 
@@ -69,26 +67,23 @@ public class BaseClass {
 	}
 
 	@AfterMethod
-	public void tearDownMethod(ITestResult result) throws IOException 
-	{
+	public void tearDownMethod(ITestResult result) throws IOException {
 		Reporter.log("Test is about to end ", true);
 
-		
-		if (result.getStatus() == ITestResult.FAILURE) 
-		{
-			logger.fail("Test Failed ", MediaEntityBuilder.createScreenCaptureFromPath(Helper.captureScreenshot(driver)).build());
-		}
-		else if(result.getStatus()==ITestResult.SUCCESS)	
-		{
-			logger.pass("Test passed ", MediaEntityBuilder.createScreenCaptureFromPath(Helper.captureScreenshot(driver)).build());
+		if (result.getStatus() == ITestResult.FAILURE) {
+			logger.fail("Test Failed ",
+					MediaEntityBuilder.createScreenCaptureFromPath(Helper.captureScreenshot(driver)).build());
+		} else if (result.getStatus() == ITestResult.SUCCESS) {
+			logger.pass("Test passed ",
+					MediaEntityBuilder.createScreenCaptureFromPath(Helper.captureScreenshot(driver)).build());
 
 		}
 
 		report.flush();
-		
+
 		Reporter.log("Test Completed >>> Reports Generated", true);
-		
-		Reporter.log("Report can be accessed via >>> "+reportPath,true);
+
+		Reporter.log("Report can be accessed via >>> " + reportPath, true);
 
 	}
 
