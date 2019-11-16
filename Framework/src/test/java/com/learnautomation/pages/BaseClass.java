@@ -49,7 +49,7 @@ public class BaseClass {
 
 //	@Parameters({ "browser", "urlToBeTested" })
 
-	@Parameters({ "browser", "urlNeedsToBeTested" })
+	@Parameters({ "BrowserName", "urlNeedsToBeTested" })
 	@BeforeClass
 	public void setup(String browser, String url) {
 

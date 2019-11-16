@@ -48,6 +48,7 @@
 
 
 	<build>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -55,15 +56,19 @@
 				<version>3.0.0-M3</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>XMLFiles/${xmlFiles}</suiteXmlFile>
+						<suiteXmlFile>XML Files/${xmlfiles}</suiteXmlFile>
 					</suiteXmlFiles>
+
+
 					<systemPropertyVariables>
-						<executionBrowser>{$browser}</executionBrowser>
-						<appUrl>{$urlToBeTested}</appUrl>
+						<executeBrowser>{$BrowserName}</executeBrowser>
+						<executeUrl>{$urlNeedsToBeTested}</executeUrl>
 					</systemPropertyVariables>
+
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 
 
